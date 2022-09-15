@@ -17,11 +17,26 @@ export const taskSlice = createSlice({
   reducers: {
     addTask: (state, action) => {
       const task = action.payload;
-      const newTask = { id: state.tasks.length, task, completed: false };
+      const newTask = { id: state.tasks.length + 1, task, completed: false };
       state.tasks.push(newTask);
+    },
+    // deleteTask: (state, action) => {
+    //   const id = action.payload;
+    //   const updatedList = state.tasks.filter((task) => task.id !== id);
+    //   state.tasks = updatedList;
+    // },
+    toggleCompleted: (state, action) => {
+      const taskId = action.payload;
+      const updatedTaskList = state.tasks.map((t) => {
+        return t.id === taskId ? { ...t, completed: !t.completed } : t;
+      });
+      state.tasks = updatedTaskList;
+    },
+    toggleShowCompleted: (state) => {
+      state.showCompletedTasks = !state.showCompletedTasks;
     },
   },
 });
-export const { addTask } = taskSlice.actions;
-
+export const { addTask, deleteTask, toggleCompleted, toggleShowCompleted } =
+  taskSlice.actions;
 export default taskSlice.reducer;

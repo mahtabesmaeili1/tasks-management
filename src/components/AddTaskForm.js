@@ -5,12 +5,15 @@ import { useDispatch } from "react-redux";
 const AddTaskForm = () => {
   const [task, setTask] = useState("");
   const dispatch = useDispatch();
-
+  const [completed, setCompleted] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("New task:", task);
     dispatch(addTask(task));
     setTask("");
+  };
+  const checkBoxHandler = () => {
+    setCompleted(!completed);
   };
   return (
     <div>
