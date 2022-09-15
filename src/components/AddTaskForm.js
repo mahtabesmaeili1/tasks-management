@@ -5,16 +5,14 @@ import { useDispatch } from "react-redux";
 const AddTaskForm = () => {
   const [task, setTask] = useState("");
   const dispatch = useDispatch();
-  const [completed, setCompleted] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("New task:", task);
     dispatch(addTask(task));
     setTask("");
   };
-  const checkBoxHandler = () => {
-    setCompleted(!completed);
-  };
+
   return (
     <div>
       <h3> Add a new task: </h3>
@@ -25,7 +23,7 @@ const AddTaskForm = () => {
           onChange={(e) => setTask(e.target.value)}
         />
 
-        <button type="submit"> Submit</button>
+        <button type="submit"> add</button>
       </form>
     </div>
   );

@@ -15,16 +15,20 @@ export const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+    changeMaxTasks: (state, action) => {
+      state.maxTasks = action.payload;
+      state.tasks.length = action.payload;
+    },
     addTask: (state, action) => {
       const task = action.payload;
       const newTask = { id: state.tasks.length + 1, task, completed: false };
       state.tasks.push(newTask);
     },
-    // deleteTask: (state, action) => {
-    //   const id = action.payload;
-    //   const updatedList = state.tasks.filter((task) => task.id !== id);
-    //   state.tasks = updatedList;
-    // },
+    deleteTask: (state, action) => {
+      const id = action.payload;
+      const updatedList = state.tasks.filter((task) => task.id !== id);
+      state.tasks = updatedList;
+    },
     toggleCompleted: (state, action) => {
       const taskId = action.payload;
       const updatedTaskList = state.tasks.map((t) => {
@@ -37,6 +41,11 @@ export const taskSlice = createSlice({
     },
   },
 });
-export const { addTask, deleteTask, toggleCompleted, toggleShowCompleted } =
-  taskSlice.actions;
+export const {
+  addTask,
+  deleteTask,
+  toggleCompleted,
+  toggleShowCompleted,
+  changeMaxTasks,
+} = taskSlice.actions;
 export default taskSlice.reducer;
